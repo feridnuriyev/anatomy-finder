@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env*
+!.env.example
+test-results/
+assets/source/bodyparts3d/*.zip
+.cache/
+assets/reference/

@@ -1,0 +1,32 @@
+ANATOMY FINDER — MODEL ATTRIBUTION
+
+BodyParts3D, © The Database Center for Life Science licensed under
+CC Attribution 4.0 International.
+
+Official dataset: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html
+Official current license: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
+CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+Source release: BodyParts3D 4.0, obj_99 (IS-A and PART-OF archives).
+Retrieved: 2026-09-09.
+
+The archive's current license page, updated 2025-02-27, specifies CC BY 4.0.
+The older embedded OBJ headers still reference CC BY-SA 2.1 Japan. Those
+original headers are preserved in the downloaded source archives. The saved
+license-page snapshot documents the current permission used for this import.
+
+Changes made for Anatomy Finder:
+- Selected skin, muscle organs, bone organs and 15 major organ structures.
+- Retained individual bones/muscles as independently selectable meshes.
+- Combined component meshes only within a single named anatomical structure.
+- Applied one shared rigid axis rotation and uniform body scale.
+- Reduced mesh density with meshoptimizer 0.22 (relative error parameter .005).
+- Applied illustrative colors and exported local GLB assets.
+- Added compound selection groups for skull, spine, rib cage, pelvis and muscles.
+
+Names, FMA identifiers and parent relationships come from the official tables.
+These are sourced anatomical models, not a medically validated product or a
+patient-specific scan. Colors, inspection scale, arrangement and materials are
+visualization choices. Function descriptions have not yet been clinically reviewed.
+
+Reproduction scripts: scripts/import_bodyparts3d.py and scripts/optimize-atlas.mjs.
+The accompanying manifest.json records structure mappings and source SHA-256 hashes.
