@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnatomyViewer } from "../three/AnatomyViewer";
 import { DepthIndicator } from "../components/DepthIndicator";
 import { DepthControl } from "../components/DepthControl";
@@ -9,14 +9,30 @@ import { structures } from "../data/structures";
 import { useAnatomyTools } from "../hooks/useAnatomyTools";
 import { AtlasStatus } from "../components/AtlasStatus";
 import { ArrangementControl } from "../components/ArrangementControl";
+import { OrientationGizmo } from "../components/OrientationGizmo";
+import type { OrientationGizmoHandle, QuaternionTuple } from "../components/OrientationGizmo";
 import type { Layer } from "../types/anatomy";
+
+type Theme = "dark" | "light";
+
+function getSystemTheme(): Theme {
+  return typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
 export default function App() {
-  const [theme, setTheme] = useState<"dark" | "light">("light");
+  const [theme, setTheme] = useState<Theme>(getSystemTheme);
+  const hasManualTheme = useRef(false);
   const [visibleLayers,setVisibleLayers]=useState<Layer[]|null>(null);
   const [explosion,setExplosion]=useState(0);
   const depth = useAnatomyDepth(()=>setVisibleLayers(null));
   const selection = useStructureSelection();
   const [resetKey, setResetKey] = useState(0);
+  const orientationRef = useRef<OrientationGizmoHandle>(null);
+  const updateOrientation = useCallback((quaternion: QuaternionTuple) => {
+    orientationRef.current?.setQuaternion(quaternion);
+  }, []);
   const selected = selection.selectedStructure;
   useAnatomyTools({
     setDepth: depth.setTargetDepth,
@@ -44,12 +60,20 @@ export default function App() {
     window.addEventListener("keydown", keydown);
     return () => window.removeEventListener("keydown", keydown);
   }, [selection.reset]);
+  useEffect(() => {
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const updateFromSystem = (event: MediaQueryListEvent) => {
+      if (!hasManualTheme.current) setTheme(event.matches ? "dark" : "light");
+    };
+    systemTheme.addEventListener("change", updateFromSystem);
+    return () => systemTheme.removeEventListener("change", updateFromSystem);
+  }, []);
   return (
     <main className={`app theme-${theme} ${selected ? "has-selection" : ""}`}>
       <header className="app-header">
         <a className="brand" href="./" aria-label="Anatomy Finder home">
           <span className="brand-mark">
-            a<span>f</span>
+            <img src="/anatomy-finder-logo.png" alt="" />
           </span>
           <span>
             Anatomy<span className="brand-light"> Finder</span>
@@ -66,7 +90,10 @@ export default function App() {
           <button
             className="theme-toggle"
             type="button"
-            onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")}
+            onClick={() => {
+              hasManualTheme.current = true;
+              setTheme((current) => current === "dark" ? "light" : "dark");
+            }}
             aria-pressed={theme === "light"}
             aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
           >
@@ -96,15 +123,9 @@ export default function App() {
             resetKey={resetKey}
             visibleLayers={visibleLayers}
             explosion={explosion}
+            onOrientationChange={updateOrientation}
           /></div>
-          <div className="orientation">
-            <span>Y</span>
-            <div>
-              ↑<br />
-              └── X
-            </div>
-            <small>ANTERIOR / ROTATABLE</small>
-          </div>
+          <OrientationGizmo ref={orientationRef} />
           <div className="stage-bottom">
             <span className="status-dot" />{" "}
             {selection.inspectionMode === "isolated"

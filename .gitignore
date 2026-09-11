@@ -5,4 +5,6 @@ dist/
 test-results/
 assets/source/bodyparts3d/*.zip
 .cache/
+.pnpm-store/
+.sites-runtime/
 assets/reference/

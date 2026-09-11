@@ -10,9 +10,10 @@ import { AtlasLayer } from "./AtlasLayer";
 import { CameraRig } from "./CameraRig";
 import type { Layer } from "../types/anatomy";
 import type { Vec3 } from "../types/anatomy";
+import type { QuaternionTuple } from "../components/OrientationGizmo";
 const EMPTY:string[]=[];
 const grouped=layers.map(layer=>({layer,items:placeholderGeometry.filter(geometry=>placeholderStructures.find(s=>s.id===geometry.id)?.layer===layer)}));
-export function HumanModel({depth,selectedId,isolated,onSelect,visibleLayers,explosion,resetKey}:{depth:number;selectedId?:string;isolated:boolean;onSelect:(id:string)=>void;visibleLayers:Layer[]|null;explosion:number;resetKey:number}) {
+export function HumanModel({depth,selectedId,isolated,onSelect,visibleLayers,explosion,resetKey,onOrientationChange}:{depth:number;selectedId?:string;isolated:boolean;onSelect:(id:string)=>void;visibleLayers:Layer[]|null;explosion:number;resetKey:number;onOrientationChange:(quaternion:QuaternionTuple)=>void}) {
   const size=useThree(state=>state.size);
   const selected=atlasManifest.structures.find(s=>s.id===selectedId);
   const activeLayer=currentLayer(depth);
@@ -38,5 +39,5 @@ export function HumanModel({depth,selectedId,isolated,onSelect,visibleLayers,exp
     const opacity=visibleLayers?(visibleLayers.includes(layer)?1:0):layerOpacity(layer,depth);
     const selectedNames=selected?.layer===layer?selected.meshNames:EMPTY;
     return <group key={layer} name={layer}><AtlasLayer layer={layer} opacity={opacity} selectedNames={selectedNames} isolated={isolated} onSelect={onSelect} shouldLoad={visibleLayers?visibleLayers.includes(layer):depth>=index*25-18} poses={layout.poses} explosion={explosion} fallback={<group>{items.map(geometry=><StructureMesh key={geometry.id} geometry={geometry} opacity={isolated?(geometry.id===selectedId?1:0):opacity} selected={geometry.id===selectedId} onSelect={onSelect}/>)}</group>}/></group>;
-  })}</group><CameraRig resetKey={resetKey} distance={distance} catalog={explosion>.05} target={selected?focusTarget:undefined}/></>;
+  })}</group><CameraRig resetKey={resetKey} distance={distance} catalog={explosion>.05} target={selected?focusTarget:undefined} onOrientationChange={onOrientationChange}/></>;
 }

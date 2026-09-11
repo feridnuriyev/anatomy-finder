@@ -13,6 +13,7 @@ export function DepthIndicator({
 }) {
   return (
     <nav className="depth-panel" aria-label="Anatomical layers">
+      <div className="creator-credit">by Farid Nuriyev</div>
       <div className="eyebrow">ANATOMY SYSTEMS</div>
       <div className="layer-list">
         {layers.map((item, index) => (

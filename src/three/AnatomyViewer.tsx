@@ -4,6 +4,7 @@ import { Html } from "@react-three/drei";
 import { HumanModel } from "./HumanModel";
 import type { Layer } from "../types/anatomy";
 import { SceneBoundary } from "../components/SceneBoundary";
+import type { QuaternionTuple } from "../components/OrientationGizmo";
 export function Lighting() {
   return (
     <>
@@ -26,6 +27,7 @@ export function AnatomyViewer({
   resetKey,
   visibleLayers,
   explosion,
+  onOrientationChange,
 }: {
   depth: number;
   selectedId?: string;
@@ -34,6 +36,7 @@ export function AnatomyViewer({
   resetKey: number;
   visibleLayers: Layer[] | null;
   explosion: number;
+  onOrientationChange: (quaternion: QuaternionTuple) => void;
 }) {
   return (
     <SceneBoundary>
@@ -59,6 +62,7 @@ export function AnatomyViewer({
             visibleLayers={visibleLayers}
             explosion={explosion}
             resetKey={resetKey}
+            onOrientationChange={onOrientationChange}
           />
         </Suspense>
       </Canvas>

@@ -1,11 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&display=swap");
 :root {
   font-family: "DM Sans", system-ui, sans-serif;
-  color: #e6e9e8;
-  background: #12191d;
+  color: #1d2b2d;
+  background: #edf3f1;
   font-synthesis: none;
   font-weight: 400;
-  color-scheme: dark;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #e6e9e8;
+    background: #12191d;
+    color-scheme: dark;
+  }
 }
 * {
   box-sizing: border-box;
@@ -77,19 +84,20 @@ a {
   color: #b5bebe;
 }
 .brand-mark {
-  display: flex;
+  display: block;
   align-items: center;
-  font-size: 25px;
-  letter-spacing: -5px;
   border: 1px solid #869b9944;
   border-radius: 10px;
-  width: 37px;
-  height: 39px;
-  padding: 0 8px;
-  color: #c6ddd5;
+  width: 42px;
+  height: 42px;
+  padding: 3px;
+  overflow: hidden;
 }
-.brand-mark span {
-  transform: translateY(-3px);
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .header-right {
   display: flex;
@@ -174,6 +182,19 @@ a {
   transform: translateY(-50%);
   width: 190px;
   transition: opacity 0.2s;
+}
+.creator-credit {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 100px);
+  transform: translateX(62px);
+  width: 100%;
+  color: #8e9fa4;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-align: center;
+  white-space: nowrap;
 }
 .depth-panel > .eyebrow {
   font-size: 10px;
@@ -305,19 +326,46 @@ input[type="range"]::-moz-range-thumb {
   left: 40px;
   font-family: monospace;
   color: #7a9297;
-  font-size: 11px;
+  width: 92px;
   pointer-events: none;
 }
-.orientation > span {
-  margin-left: 3px;
+.orientation-gizmo {
+  display: block;
+  width: 58px;
+  height: 58px;
+  overflow: visible;
 }
-.orientation > div {
-  line-height: 15px;
-  color: #b5c9c4;
+.orientation-gizmo .axis line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+}
+.orientation-gizmo .axis circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+.orientation-gizmo .axis text {
+  fill: currentColor;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+}
+.orientation-gizmo .axis-depth-mark {
+  font-size: 7px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.orientation-gizmo .axis-x { color: #9bc7bd; fill: #9bc7bd; }
+.orientation-gizmo .axis-y { color: #b8d4cd; fill: #b8d4cd; }
+.orientation-gizmo .axis-z { color: #789da5; fill: #789da5; }
+.orientation-gizmo .axis-origin {
+  fill: #d8e8e3;
 }
 .orientation small {
   display: block;
-  margin-top: 13px;
+  margin-top: 4px;
   font-size: 8px;
   letter-spacing: 1px;
 }
@@ -657,6 +705,9 @@ input[type="range"]::-moz-range-thumb {
   .depth-panel > .eyebrow {
     display: none;
   }
+  .creator-credit {
+    display: none;
+  }
   .layer-list {
     display: flex;
     margin: 0 0 13px;
@@ -693,7 +744,11 @@ input[type="range"]::-moz-range-thumb {
     display: none;
   }
   .orientation {
-    bottom: 58px;
+    bottom: 138px;
+  }
+  .orientation-gizmo {
+    width: 48px;
+    height: 48px;
   }
   .orientation small {
     display: none;

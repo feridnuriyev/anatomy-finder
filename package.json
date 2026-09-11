@@ -7,6 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "build": "tsc --noEmit && vite build",
+    "deploy:cloudflare": "pnpm build && pnpm dlx wrangler pages deploy dist --project-name anatomy-finder",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "format": "prettier --write src tests *.json *.ts *.md *.yaml"
