@@ -996,3 +996,329 @@ input[type="range"]::-moz-range-thumb {
     transform: none;
   }
 }
+
+/* Phone portrait: keep controls in distinct, touch-friendly rows. */
+@media (max-width: 600px) and (orientation: portrait) {
+  .app-header {
+    height: 62px;
+    margin: 0 12px;
+  }
+  .brand {
+    gap: 9px;
+    font-size: 16px;
+  }
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+  }
+  .reset-view {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px;
+    font-size: 0;
+  }
+  .reset-view span {
+    margin-right: 0;
+    font-size: 18px;
+  }
+  .theme-toggle {
+    min-height: 40px;
+    padding: 8px 10px;
+  }
+  .main-stage {
+    height: calc(100% - 132px);
+  }
+  .stage-caption {
+    max-width: 140px;
+  }
+  .stage-caption h1 {
+    font-size: 23px;
+    line-height: 1.05;
+  }
+  .atlas-status.ready {
+    display: none;
+  }
+  .exploration-controls {
+    bottom: 38px;
+  }
+  .orientation {
+    bottom: 118px;
+  }
+  .stage-bottom {
+    bottom: 8px;
+  }
+  .structure-picker {
+    left: 18px;
+    right: 18px;
+    bottom: 88px;
+    width: auto;
+  }
+  .structure-picker select {
+    min-height: 42px;
+    padding: 10px 12px;
+  }
+  .depth-panel {
+    bottom: 12px;
+  }
+  .layer-list {
+    margin: 0;
+  }
+  .layer-button {
+    min-height: 44px;
+  }
+}
+
+/* Phone landscape: reserve a compact right rail and keep the model usable. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .app {
+    min-height: 0;
+  }
+  .app-header {
+    height: 54px;
+    margin: 0 16px;
+  }
+  .brand {
+    gap: 8px;
+    font-size: 16px;
+  }
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+  }
+  .header-right {
+    gap: 8px;
+  }
+  .prototype-badge {
+    display: none;
+  }
+  .reset-view,
+  .theme-toggle {
+    min-height: 38px;
+    padding: 7px 10px;
+  }
+  .app-footer {
+    display: none;
+  }
+  .workspace,
+  .has-selection .workspace {
+    display: flex;
+    min-height: 0;
+  }
+  .main-stage {
+    width: 100%;
+    height: 100%;
+  }
+  .stage-caption {
+    top: 15px;
+    left: 16px;
+    max-width: 150px;
+  }
+  .stage-caption h1,
+  .has-selection .stage-caption h1 {
+    margin-top: 7px;
+    font-size: 25px;
+  }
+  .stage-caption p {
+    display: none;
+  }
+  .body-canvas,
+  .has-selection .body-canvas {
+    inset: 0 174px 88px 0;
+  }
+  .atlas-status,
+  .has-selection .atlas-status {
+    top: 50%;
+    left: 16px;
+    max-width: 135px;
+    transform: translateY(-50%);
+    font-size: 9px;
+  }
+  .orientation {
+    bottom: 96px;
+    left: 16px;
+  }
+  .orientation-gizmo {
+    width: 44px;
+    height: 44px;
+  }
+  .stage-bottom {
+    right: auto;
+    bottom: 10px;
+    left: 16px;
+  }
+  .stage-scale {
+    display: none;
+  }
+  .exploration-controls {
+    left: calc((100% - 174px) / 2);
+    bottom: 10px;
+    width: min(390px, calc(100% - 210px));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .main-stage .exploration-controls .arrangement-control,
+  .main-stage .depth-control {
+    display: block;
+    padding: 7px 9px;
+  }
+  .main-stage .exploration-controls .arrangement-control input,
+  .depth-control input {
+    margin: 6px 0 2px;
+  }
+  .depth-panel {
+    top: 14px;
+    right: 16px;
+    bottom: auto;
+    left: auto;
+    width: 150px;
+    transform: none;
+  }
+  .depth-panel > .eyebrow {
+    display: block;
+    font-size: 8px;
+  }
+  .creator-credit {
+    display: none;
+  }
+  .layer-list {
+    margin: 12px 0 0;
+  }
+  .layer-button {
+    min-height: 43px;
+    padding: 9px 8px;
+    font-size: 12px;
+  }
+  .structure-picker {
+    right: 16px;
+    bottom: 10px;
+    left: auto;
+    width: 150px;
+  }
+  .structure-picker label {
+    display: none;
+  }
+  .structure-picker select {
+    min-height: 40px;
+    padding: 8px;
+  }
+  .has-selection .main-stage {
+    width: 46%;
+    height: 100%;
+  }
+  .has-selection .body-canvas {
+    inset: 0;
+  }
+  .has-selection .orientation,
+  .has-selection .exploration-controls,
+  .has-selection .depth-panel,
+  .has-selection .structure-picker {
+    display: none;
+  }
+  .inspection-panel {
+    position: relative;
+    inset: auto;
+    width: 54%;
+    height: 100%;
+    padding: 10px 14px;
+    border-top: 0;
+    border-left: 1px solid #ffffff18;
+    border-radius: 0;
+    overflow: auto;
+  }
+  .inspection-header {
+    height: 28px;
+  }
+  .inspection-header .eyebrow {
+    font-size: 8px;
+  }
+  .structure-title {
+    position: static;
+    max-width: none;
+    margin-top: 6px;
+    pointer-events: auto;
+  }
+  .structure-title h2 {
+    margin: 3px 0;
+    font-size: 20px;
+  }
+  .structure-summary {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 10px;
+    line-height: 1.35;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  .structure-canvas {
+    min-height: 72px;
+    margin-left: 0;
+  }
+  .inspection-actions {
+    margin-top: 4px;
+  }
+  .inspection-actions button {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+  .inspection-hint {
+    display: none;
+  }
+  .details-panel {
+    position: absolute;
+    inset: 40px 12px 48px;
+    z-index: 2;
+    max-height: none;
+    margin: 0;
+    padding: 12px;
+    border: 1px solid #ffffff15;
+    border-radius: 10px;
+    background: #182226;
+  }
+  .theme-light .details-panel {
+    background: #f7fbf9;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 650px) {
+  .app-header {
+    margin: 0 12px;
+  }
+  .reset-view {
+    min-width: 38px;
+    font-size: 0;
+  }
+  .reset-view span {
+    margin-right: 0;
+    font-size: 18px;
+  }
+  .layer-list {
+    display: block;
+  }
+  .layer-list .layer-row {
+    width: 100%;
+  }
+  .layer-button {
+    min-height: 34px;
+    padding: 5px 7px;
+    font-size: 10px;
+  }
+  .layer-number {
+    font-size: 7px;
+  }
+  .visibility-button {
+    padding: 5px 3px;
+    font-size: 11px;
+  }
+  .structure-summary {
+    -webkit-line-clamp: 2;
+  }
+  .structure-canvas {
+    min-height: 90px;
+  }
+  .orientation,
+  .stage-bottom {
+    display: none;
+  }
+}
