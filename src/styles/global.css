@@ -185,16 +185,44 @@ a {
 }
 .creator-credit {
   position: absolute;
-  right: 0;
+  left: 50%;
   bottom: calc(100% + 100px);
-  transform: translateX(62px);
-  width: 100%;
+  transform: translateX(calc(-50% + 42px));
+  width: max-content;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid #b6cec61f;
+  border-radius: 10px;
+  background: #ffffff08;
+  box-shadow: 0 6px 20px #0000000a;
   color: #8e9fa4;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1.8px;
   text-align: center;
   white-space: nowrap;
+  z-index: 3;
+  transition: border-color .2s ease, background-color .2s ease, color .2s ease, transform .2s ease;
+}
+.creator-credit:hover {
+  transform: translateX(calc(-50% + 42px)) translateY(-1px);
+  border-color: #b6cec63d;
+  background: #ffffff0d;
+  color: #b7c8c5;
+}
+.creator-credit:active {
+  transform: translateX(calc(-50% + 42px));
+}
+.creator-github-mark {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  color: #0c1012;
+  filter: drop-shadow(0 0 1px #d6e0dd66);
 }
 .depth-panel > .eyebrow {
   font-size: 10px;
@@ -862,6 +890,21 @@ input[type="range"]::-moz-range-thumb {
 }
 .theme-light .layer-row + .layer-row {
   border-color: #28454514;
+}
+.theme-light .creator-credit {
+  color: #637b7c;
+  border-color: #28454526;
+  background: #ffffff70;
+  box-shadow: 0 7px 22px #3759540a;
+}
+.theme-light .creator-credit:hover {
+  color: #314f50;
+  border-color: #28454542;
+  background: #ffffffa3;
+}
+.theme-light .creator-github-mark {
+  color: #0b0f10;
+  filter: none;
 }
 .theme-light .structure-picker select { color: #254143; background: #ffffffd9; border-color: #28454533; }
 .theme-light .inspection-panel { background: #f7fbf9ed; border-color: #28454524; }
