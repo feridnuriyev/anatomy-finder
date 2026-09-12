@@ -999,9 +999,25 @@ input[type="range"]::-moz-range-thumb {
 
 /* Phone portrait: keep controls in distinct, touch-friendly rows. */
 @media (max-width: 600px) and (orientation: portrait) {
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch;
+  }
+  .app {
+    display: block;
+    height: auto;
+    min-height: 0;
+  }
   .app-header {
     height: 62px;
     margin: 0 12px;
+  }
+  .workspace {
+    height: calc(100dvh - 108px);
+    height: calc(100svh - 108px);
+    min-height: 472px;
   }
   .brand {
     gap: 9px;
@@ -1025,6 +1041,12 @@ input[type="range"]::-moz-range-thumb {
   .theme-toggle {
     min-height: 40px;
     padding: 8px 10px;
+  }
+  .header-right {
+    gap: 8px;
+  }
+  .main-stage canvas {
+    touch-action: pan-y !important;
   }
   .main-stage {
     height: calc(100% - 132px);
