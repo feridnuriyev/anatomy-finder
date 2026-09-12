@@ -185,9 +185,8 @@ a {
 }
 .creator-credit {
   position: absolute;
-  left: 50%;
+  right: 0;
   bottom: calc(100% + 100px);
-  transform: translateX(calc(-50% + 42px));
   width: max-content;
   min-height: 40px;
   display: flex;
@@ -209,13 +208,13 @@ a {
   transition: border-color .2s ease, background-color .2s ease, color .2s ease, transform .2s ease;
 }
 .creator-credit:hover {
-  transform: translateX(calc(-50% + 42px)) translateY(-1px);
+  transform: translateY(-1px);
   border-color: #b6cec63d;
   background: #ffffff0d;
   color: #b7c8c5;
 }
 .creator-credit:active {
-  transform: translateX(calc(-50% + 42px));
+  transform: translateY(0);
 }
 .creator-github-mark {
   width: 15px;
@@ -401,7 +400,7 @@ input[type="range"]::-moz-range-thumb {
   position: absolute;
   bottom: 23px;
   left: 39px;
-  right: 38px;
+  right: 36px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -629,12 +628,6 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 @media (min-width: 1500px) {
-  .depth-panel {
-    right: 65px;
-  }
-  .structure-picker {
-    right: 65px;
-  }
   .stage-caption {
     left: 55px;
     top: 55px;
@@ -682,6 +675,7 @@ input[type="range"]::-moz-range-thumb {
   }
   .stage-bottom {
     left: 22px;
+    right: 20px;
   }
   .orientation {
     left: 24px;
