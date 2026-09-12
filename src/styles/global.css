@@ -1094,17 +1094,17 @@ input[type="range"]::-moz-range-thumb {
     border-top: 0;
   }
   .layer-list .layer-row + .layer-row {
-    border-left: 1px solid #ffffff0d;
+    border-left: 1px solid #ffffff20;
   }
   .layer-list .layer-button {
     min-width: 0;
     min-height: 54px;
-    padding: 7px 22px 7px 9px;
+    padding: 7px 4px 8px;
     border-left: 0;
     border-bottom: 2px solid transparent;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-end;
     gap: 3px;
     font-size: 11px;
     line-height: 1;
@@ -1115,25 +1115,25 @@ input[type="range"]::-moz-range-thumb {
     border-bottom-color: #a7cabe;
   }
   .layer-list .layer-number {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 8px;
     line-height: 1;
   }
+  .layer-list .layer-button > span:nth-child(2) {
+    width: 100%;
+    text-align: center;
+  }
   .layer-list .visibility-button {
-    top: 50%;
-    right: 3px;
-    width: 20px;
-    min-width: 20px;
-    height: 32px;
-    padding: 0;
-    transform: translateY(-50%);
-    font-size: 12px;
+    display: none;
   }
   .theme-light .layer-list .layer-row + .layer-row {
-    border-left-color: #28454514;
+    border-left-color: #28454524;
   }
   @media (max-width: 360px) {
     .layer-list .layer-button {
-      padding-left: 7px;
       font-size: 10px;
     }
   }
