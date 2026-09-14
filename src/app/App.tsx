@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnatomyViewer } from "../three/AnatomyViewer";
-import { DepthIndicator } from "../components/DepthIndicator";
+import { CreatorCredit, DepthIndicator } from "../components/DepthIndicator";
 import { DepthControl } from "../components/DepthControl";
 import { SelectedStructurePanel } from "../components/SelectedStructurePanel";
 import { useAnatomyDepth } from "../hooks/useAnatomyDepth";
@@ -68,6 +68,13 @@ export default function App() {
     systemTheme.addEventListener("change", updateFromSystem);
     return () => systemTheme.removeEventListener("change", updateFromSystem);
   }, []);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => {
+      meta.content = theme === "dark" ? "#12191d" : "#edf3f1";
+    });
+  }, [theme]);
   return (
     <main className={`app theme-${theme} ${selected ? "has-selection" : ""}`}>
       <header className="app-header">
@@ -201,10 +208,19 @@ export default function App() {
         </div>
       </div>
       <footer className="app-footer">
+        <CreatorCredit className="mobile-creator-credit" />
         <span className="scroll-instruction">
-          <span className="mouse-icon" /> Scroll to explore deeper anatomy
+          <span className="mouse-icon" aria-hidden="true" />
+          <svg className="touch-icon" viewBox="0 0 32 28" aria-hidden="true" focusable="false">
+            <rect x="2" y="1.5" width="14" height="23" rx="3" />
+            <path d="M7 4.5h4M7 21.5h4" />
+            <path d="M21 26c-2.4 0-4.2-1.2-5.1-3.2l-2-4.3a1.45 1.45 0 0 1 2.45-1.5l1.45 1.65V10.2a1.65 1.65 0 0 1 3.3 0v5.1-1.25a1.55 1.55 0 0 1 3.1 0v1.55-.75a1.45 1.45 0 0 1 2.9 0v1.45-.25a1.35 1.35 0 0 1 2.7 0v3.6c0 3.7-2.6 6.35-6.3 6.35H21Z" />
+            <path className="touch-motion" d="M23.5 7.2c1.2.55 2.1 1.55 2.5 2.8M23.8 3.5c2.75.85 4.9 3.05 5.7 5.8" />
+          </svg>
+          <span className="desktop-scroll-copy">Scroll to explore deeper anatomy</span>
+          <span className="mobile-scroll-copy">Swipe to explore anatomy</span>
         </span>
-        <span>
+        <span className="desktop-interaction-instruction">
           Drag to rotate <b>·</b> Select to inspect
         </span>
         <span className="prototype-note">
